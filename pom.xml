@@ -38,6 +38,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -56,25 +61,25 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.slf4j</groupId> -->
+<!-- 			<artifactId>slf4j-api</artifactId> -->
+<!-- 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>ch.qos.logback</groupId> -->
+<!-- 			<artifactId>logback-core</artifactId> -->
+<!-- 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>test</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>ch.qos.logback</groupId> -->
+<!-- 			<artifactId>logback-classic</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
 
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<!-- https://mvnrepository.com/artifact/junit/junit --> 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
