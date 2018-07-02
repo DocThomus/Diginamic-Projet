@@ -10,7 +10,7 @@ public class User {
 	@GeneratedValue(generator = "user_id_seq")
 	private int id;
 	
-	@Column
+	@Column(unique = true)
 	private String email;
 	
 	@Column
@@ -25,6 +25,11 @@ public class User {
 		this.email = email;
 		this.hashedPassword = hashedPassword;
 		this.role = role;
+	}
+	
+	public User(String email, String hashedPassword) {
+		this.email = email;
+		this.hashedPassword = hashedPassword;
 	}
 	
 	public int getId() {
