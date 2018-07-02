@@ -1,4 +1,4 @@
-package fr.durandal.durandalback.config;
+package fr.durandal.durandalback;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package fr.durandal.durandalback.config;
+package fr.durandal.durandalback;
 
 import javax.persistence.*;
 
