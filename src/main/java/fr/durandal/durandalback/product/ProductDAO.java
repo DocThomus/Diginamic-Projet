@@ -3,9 +3,11 @@ package fr.durandal.durandalback.product;
 import java.awt.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.query.Query;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,10 +38,9 @@ public class ProductDAO {
 
 	 @RequestMapping(value = "/produit", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseStatus( HttpStatus.CREATED)
-	public String addProduct(@RequestBody Product prod) {
+	public String addProduct(@RequestBody Product p) {
 		
 		EntityManager em = DatabaseHelper.createEntityManager();
-		Product p = prod;
 		DatabaseHelper.beginTx(em);
 		em.persist(p);
 		DatabaseHelper.commitTxAndClose(em);
@@ -60,11 +61,12 @@ public class ProductDAO {
 		 
 	 }
 	 
-	 @DeleteMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
+	 @DeleteMapping(value = "/produit")
 	 @ResponseStatus( HttpStatus.ACCEPTED)
-	 public String delProduct(@RequestBody Product prod) {
+	 public String delProduct(@RequestBody long id) {
 			EntityManager em = DatabaseHelper.createEntityManager();
 			DatabaseHelper.beginTx(em);
+			Product prod = em.find(Product.class, id);
 			em.remove(prod);
 			DatabaseHelper.commitTxAndClose(em);
 			 

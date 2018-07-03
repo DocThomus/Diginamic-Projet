@@ -11,8 +11,8 @@ import javax.validation.constraints.Min;
 public class Product {
 	
 	@Id
-	@SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", initialValue=1)
-	@GeneratedValue(generator = "user_id_seq")
+	@SequenceGenerator(name="product_id_seq", sequenceName = "product_id_seq", initialValue=1)
+	@GeneratedValue(generator = "product_id_seq")
 	private Long id ;
 	
 	@Column
