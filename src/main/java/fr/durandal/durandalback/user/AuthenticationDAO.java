@@ -1,27 +1,30 @@
 package fr.durandal.durandalback.user;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import fr.durandal.durandalback.DatabaseHelper;
 
 
 @RestController
 public class AuthenticationDAO {
-
-	@RequestMapping("/testUser")
-	public User getTestUser() {
-		return User.getTestUser();
+	
+	@RequestMapping("/visitor")
+	public Principal visitor(Principal user) {
+		return user;
 	}
+	
+	@RequestMapping("/visitor/details")
+	  public Map<String,Object> home() {
+	    Map<String,Object> model = new HashMap<String,Object>();
+	    model.put("hello", "Hello World");
+	    return model;
+	  }
 
-	// Methode pour créer un compte utilisateur
+	/*// Methode pour créer un compte utilisateur
 	@PostMapping(value="/user/new", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public User addUser(@RequestBody String email, @RequestBody String hashedPassword) {
 		User user = new User(email, hashedPassword);
@@ -51,7 +54,7 @@ public class AuthenticationDAO {
 		// TODO : cas ou user pas dans base de donnée (il doit se créer un compte)
 		// TODO : vérifier le mot de passe
 		return user;
-	}
+	}*/
 
 	
 }

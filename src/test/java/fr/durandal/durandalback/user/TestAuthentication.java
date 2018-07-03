@@ -11,7 +11,7 @@ public class TestAuthentication {
 	
 	private static AuthenticationDAO dao = new AuthenticationDAO();
 
-	@Test
+	/*@Test
 	public void testCreateUser() {
 		dao.addUser("test@test.fr", "hasheDpassWorD12234");
 	}
@@ -36,7 +36,7 @@ public class TestAuthentication {
 	@Test
 	public void testLoginNotExisting() {
 		dao.logUser("notexisting@test.fr", "hasheDpassWorD12234");
-	}
+	}*/
 	
 		
 }

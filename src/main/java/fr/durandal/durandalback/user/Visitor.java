@@ -3,7 +3,7 @@ package fr.durandal.durandalback.user;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class Visitor {
 	
 	@Id
 	@SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", initialValue=1)
@@ -19,7 +19,7 @@ public class User {
 	@Column
 	private String role;
 	
-	public User(int id, String email, String hashedPassword, String role) {
+	public Visitor(int id, String email, String hashedPassword, String role) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -27,7 +27,7 @@ public class User {
 		this.role = role;
 	}
 	
-	public User(String email, String hashedPassword) {
+	public Visitor(String email, String hashedPassword) {
 		this.email = email;
 		this.hashedPassword = hashedPassword;
 	}
@@ -70,7 +70,7 @@ public class User {
 	}
 
 	// TEST
-	public static User getTestUser() {
-		return new User(42, "Greg@greg.com", "123pass", "utilisateur");
+	public static Visitor getTestUser() {
+		return new Visitor(42, "Greg@greg.com", "123pass", "utilisateur");
 	}
 }
