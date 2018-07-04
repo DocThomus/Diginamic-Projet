@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Product {
@@ -13,17 +16,17 @@ public class Product {
 	@Id
 	@SequenceGenerator(name="product_id_seq", sequenceName = "product_id_seq", initialValue=1)
 	@GeneratedValue(generator = "product_id_seq")
-	private Long id ;
+	private Long id;
 	
 	@Column
-	private String nom ;
+	private String nom;
 	
-	@Column
+	@Column(length=1000000)
 	private String description;
 	
 	@Column
 	@Min(value = 0)
-	private Integer prix ;
+	private double prix;
 	
 	
 	@Column
@@ -31,10 +34,23 @@ public class Product {
 	private Integer quantite; 
 	
 	@Column
-	private String imageURI ;
+	private String imageURI;
 	
 	@Column
 	private String categorie;
+	
+	// Constructeur initialisation des produits en base (lien ProductDAO)
+	public Product (String nom, String description, double prix, Integer quantite, String categorie, String imageURI) {
+	this.nom = nom;
+	this.description = description;
+	this.prix = prix;
+	this.quantite = quantite;
+	this.categorie = categorie;
+	this.imageURI = imageURI;
+	}
+	
+	
+	
 
 	public String getCategorie() {
 		return categorie;
@@ -68,11 +84,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public Integer getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(Integer prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
