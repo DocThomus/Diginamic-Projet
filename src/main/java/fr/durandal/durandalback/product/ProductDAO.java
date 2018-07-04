@@ -36,7 +36,7 @@ public class ProductDAO {
 		return p;
 	}
 
-	 @RequestMapping(value = "/produit", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
+	 @PostMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	 @ResponseStatus( HttpStatus.CREATED)
 	public String addProduct(@RequestBody Product p) {
 		
