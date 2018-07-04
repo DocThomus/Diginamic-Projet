@@ -18,46 +18,69 @@ public class Product {
 	@GeneratedValue(generator = "product_id_seq")
 	private Long id;
 	
+	/* ON FERA CA PLUS TARD
 	@Column
-	private String nom;
+	private String ref;
+	*/
 	
-	@Column(length=1000000)
+	@Column
+	private String name;
+	
+	@Column(columnDefinition="text")
 	private String description;
 	
 	@Column
 	@Min(value = 0)
-	private double prix;
+	private double price;
 	
 	
 	@Column
 	@Min(value = 0)
-	private Integer quantite; 
+	private Integer quantity; 
 	
 	@Column
-	private String imageURI;
+	private String picture;
 	
 	@Column
-	private String categorie;
+	private String type;
+	
+	@Column
+	private String editor;
+	
+	@Column(name="is_active")
+	private boolean isActive = true;
+	
+	// Constructeure par défaut
+	public Product() {
+		
+	}
 	
 	// Constructeur initialisation des produits en base (lien ProductDAO)
-	public Product (String nom, String description, double prix, Integer quantite, String categorie, String imageURI) {
-	this.nom = nom;
-	this.description = description;
-	this.prix = prix;
-	this.quantite = quantite;
-	this.categorie = categorie;
-	this.imageURI = imageURI;
+	public Product (String name, String description, double price, int quantity, String type, String picture, String editor) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.quantity = quantity;
+		this.type = type;
+		this.picture = picture;
+		this.editor = editor;
 	}
 	
-	
+	public Product (String name, String description, double price, int quantity, String type, String picture, String editor, boolean isActive) {
+		this(name, description, price, quantity, type, picture, editor);
+		this.isActive = isActive;
+	}
 	
 
-	public String getCategorie() {
-		return categorie;
+
+
+
+	public String getType() {
+		return type;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Long getId() {
@@ -68,12 +91,12 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -84,29 +107,50 @@ public class Product {
 		this.description = description;
 	}
 
-	public double getPrix() {
-		return prix;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPrix(double prix) {
-		this.prix = prix;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public Integer getQuantite() {
-		return quantite;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuantite(Integer quantite) {
-		this.quantite = quantite;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	public String getImageURI() {
-		return imageURI;
+	public String getPicture() {
+		return picture;
 	}
 
-	public void setImageURI(String imageURI) {
-		this.imageURI = imageURI;
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+
+	public String getEditor() {
+		return editor;
+	}
+
+
+	public void setEditor(String editor) {
+		this.editor = editor;
 	}
 	
+	
+	
+	/* ON FERA CA PLUS TARD
+	public String getRef() {
+		return ref;
+	}
+
+	public void setRef() {
+		this.ref = this.getType().substring(0, 3)+this.getId();
+	}
+	*/
 	
 }
