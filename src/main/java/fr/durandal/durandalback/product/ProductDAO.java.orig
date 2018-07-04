@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +37,13 @@ public class ProductDAO {
 		return p;
 	}
 
-	@PostMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
+<<<<<<< HEAD
+	 @PostMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseStatus( HttpStatus.CREATED)
+=======
+	@RequestMapping(value = "/produit", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.CREATED)
+>>>>>>> de42fcc489f4df1d5bad6e9fe799549f5f45a143
 	public String addProduct(@RequestBody Product p) {
 
 		EntityManager em = DatabaseHelper.createEntityManager();
