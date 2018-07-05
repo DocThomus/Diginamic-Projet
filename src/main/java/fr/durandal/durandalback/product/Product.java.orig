@@ -26,12 +26,13 @@ public class Product {
 <<<<<<< HEAD
 	@Type (type = "text")
 	@Column
-=======
-	@Column
 	private String name;
 	
 	@Column(columnDefinition="text")
->>>>>>> 4c12952fff4e394d7f3fd99bd83c0d2a6944e0dc
+=======
+	@Column
+	@Type(type="text")
+>>>>>>> 843031f2509cba37a4d695d54120cea0e03fde12
 	private String description;
 	
 	@Column
@@ -59,9 +60,8 @@ public class Product {
 	public Product() {
 		
 	}
-	
 <<<<<<< HEAD
-=======
+	
 	// Constructeur initialisation des produits en base (lien ProductDAO)
 	public Product (String name, String description, double price, int quantity, String type, String picture, String editor) {
 		this.name = name;
@@ -71,6 +71,10 @@ public class Product {
 		this.type = type;
 		this.picture = picture;
 		this.editor = editor;
+=======
+	public Product () {
+		
+>>>>>>> 843031f2509cba37a4d695d54120cea0e03fde12
 	}
 	
 	public Product (String name, String description, double price, int quantity, String type, String picture, String editor, boolean isActive) {
@@ -78,7 +82,6 @@ public class Product {
 		this.isActive = isActive;
 	}
 	
->>>>>>> 4c12952fff4e394d7f3fd99bd83c0d2a6944e0dc
 
 
 
