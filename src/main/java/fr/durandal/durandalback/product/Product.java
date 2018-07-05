@@ -21,7 +21,8 @@ public class Product {
 	@Column
 	private String nom;
 	
-	@Column(length=1000000)
+	@Type (type = "text")
+	@Column
 	private String description;
 	
 	@Column
@@ -48,8 +49,6 @@ public class Product {
 	this.categorie = categorie;
 	this.imageURI = imageURI;
 	}
-	
-	
 	
 
 	public String getCategorie() {
