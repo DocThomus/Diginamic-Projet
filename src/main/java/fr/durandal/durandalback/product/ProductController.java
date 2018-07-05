@@ -3,12 +3,12 @@ package fr.durandal.durandalback.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,20 +24,20 @@ public class ProductController {
 		return productDAO.getProductDetailsByID(id);
 	}
 
-	@RequestMapping(value = "/produit", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/addProduit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.CREATED)
-	public String addProduct(@RequestBody Product p) {
+	@PreAuthorize("hasRole('ADMIN')")
+	public Product addProduct(@RequestBody Product p) {
 		productDAO.addProduct(p);
-		return "added";
+		return p;
 	}
 
 
 	@PutMapping(value = "/produit" , consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.ACCEPTED)
-	public String updateProduct(@RequestBody Product prod) {
+	public Product updateProduct(@RequestBody Product prod) {
 		productDAO.updateProduct(prod);
-		return "Produit a jour";
-
+		return prod;
 	}
 
 	@DeleteMapping(value = "/produit")

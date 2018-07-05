@@ -120,23 +120,26 @@ public class ProductDAO {
 
 	}
 
-
+	@Transactional
 	public Product getProductDetailsByID(Long id) {
 		return em.find(Product.class, id);
 	}
 
 
+	@Transactional
 	public void addProduct(Product p) {
+		System.out.println(p);
+		System.out.println(em);
 		em.persist(p);
 	}
 
-
+	@Transactional
 	public void updateProduct(Product prod) {
 		em.merge(prod);
 		
 	}
 
-
+	@Transactional
 	public void deleteProductByID(long id) {
 		Product p = em.find(Product.class, id);
 		em.remove(p);		

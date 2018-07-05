@@ -1,7 +1,7 @@
 package fr.durandal.durandalback.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,14 +20,13 @@ public class AuthenticationSecurity implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         
-        List<GrantedAuthority> authorities = new ArrayList<>();        
+        Set<GrantedAuthority> authorities = new HashSet<>();        
         
         Visitor user = authenticationDAO.getUserByEmail(email);
         if (user.getIsAdmin()) {
-        	authorities.add(new SimpleGrantedAuthority("ADMIN"));
-        } else {
-        	authorities.add(new SimpleGrantedAuthority("USER"));
-        }  
+        	authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } 
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         
         UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
                 
