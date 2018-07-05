@@ -13,7 +13,7 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.web.server.session.HeaderWebSessionIdResolver;
 import org.springframework.web.server.session.WebSessionIdResolver;
 
-import fr.durandal.durandalback.user.AuthenticationService;
+import fr.durandal.durandalback.user.AuthenticationSecurity;
 
 @Configuration
 @Order(SecurityProperties.BASIC_AUTH_ORDER-1)
@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationService authService) throws Exception {
-        auth.userDetailsService(authService).passwordEncoder(passwordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationSecurity authSecurity) throws Exception {
+        auth.userDetailsService(authSecurity).passwordEncoder(passwordEncoder());
     }
 }
