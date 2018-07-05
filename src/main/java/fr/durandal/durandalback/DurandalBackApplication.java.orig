@@ -1,26 +1,37 @@
 package fr.durandal.durandalback;
 
+<<<<<<< HEAD
+=======
 import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 02d6f9e8c5b68ecefbe17f75676b1bf136ee21cb
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import fr.durandal.durandalback.user.AuthenticationDAO;
+<<<<<<< HEAD
 import fr.durandal.durandalback.product.ProductDAO;
 import fr.durandal.durandalback.storage.StorageProperties;
 import fr.durandal.durandalback.storage.StorageService;
 
+@SpringBootApplication@EnableConfigurationProperties(StorageProperties.class)
+public class DurandalBackApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DurandalBackApplication.class, args);
+	
+		//ProductDAO.initProducts();
+		
+		
+=======
+import fr.durandal.durandalback.user.AuthenticationDAO;
+
 @SpringBootApplication
-@EnableConfigurationProperties(StorageProperties.class)
 public class DurandalBackApplication implements CommandLineRunner {
 	
 	@Autowired 
 	AuthenticationDAO authenticationDAO;
-	
-	@Autowired
-	ProductDAO productDAO;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DurandalBackApplication.class, args);		
@@ -35,7 +46,7 @@ public class DurandalBackApplication implements CommandLineRunner {
 	public void mockups() {
 		System.out.println("Running mockups");
 		authenticationDAO.mockupUsers();
-		productDAO.initProducts();
+>>>>>>> 02d6f9e8c5b68ecefbe17f75676b1bf136ee21cb
 	}
 
 	@Bean

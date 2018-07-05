@@ -1,18 +1,21 @@
 package fr.durandal.durandalback.product;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
-import fr.durandal.durandalback.DatabaseHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class ProductDAO {
 
-	
+	@Autowired 
+	EntityManager em;
 
-	public static void initProducts() {
+	@Transactional
+	public void initProducts() {
 		ArrayList<Product> tableauProduits = new ArrayList<Product>();
 		
 		String s1 = "Tout le monde sait jouer au 1000 Bornes : la première équipe qui franchit 1000 km - 1000 Bornes, en parant intelligemment les embûches de ses adversaires, gagne la partie! (Joueurs: 2 à 8, Date: 1954)";
@@ -47,9 +50,6 @@ public class ProductDAO {
 		String s30 = "Les animaux du fermier Pippo sont tous uniques : il y a des chevaux, des cochons, des chats, des chiens et des vaches, tous combinés en 5 couleurs différentes. A chaque tour on retourne une carte qui présente 4 animaux dans 4 couleurs. Vite, vite, il faut chercher l'animal manquant dans la bonne couleur. Le premier qui le trouve gagne la carte. Quand toutes les cartes ont été trouvées, celui qui en a le plus a gagné. Un jeu intelligent qui aiguise les réflexes et le sens de l'observation. (Joueurs: 2 à 8, Date: 2005)";
 		
 		//String uri = "https://placeimg.com/240/280";
-		
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
 
 		Product p1 = new Product("1000 bornes",s1,19.90,35,"Cartes et petits jeux", "/image/1000-bornes.jpg", "Dujardin");
 		Product p2 = new Product("Copyright",s2,10.90,22,"Cartes et petits jeux", "/image/copyright.jpg", "Ferti");
@@ -116,7 +116,26 @@ public class ProductDAO {
 		for(Product p : tableauProduits) {
 			em.persist(p);
 		}
-		DatabaseHelper.commitTxAndClose(em);
+	}
+	
+	public Product getProductDetailsByID(Long id) {
+		return em.find(Product.class, id);
+	}
 
+
+	public void addProduct(Product p) {
+		em.persist(p);
+	}
+
+
+	public void updateProduct(Product prod) {
+		em.merge(prod);
+		
+	}
+
+
+	public void deleteProductByID(long id) {
+		Product p = em.find(Product.class, id);
+		em.remove(p);		
 	}
 }
