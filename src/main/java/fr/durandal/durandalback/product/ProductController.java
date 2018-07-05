@@ -2,8 +2,7 @@ package fr.durandal.durandalback.product;
 
 import java.net.URL;
 
-import javax.persistence.EntityManager;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
@@ -11,56 +10,42 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
-import fr.durandal.durandalback.DatabaseHelper;
 
 @RestController
 public class ProductController {
+	
+	@Autowired
+	ProductDAO productDAO;
+	
 	@GetMapping(value="/produit", produces= MediaType.APPLICATION_JSON_VALUE)
-	public  Product getProductDetails( @RequestParam(value="id" ) Long id) {
-		EntityManager em = DatabaseHelper.createEntityManager();
-
-		Product p = em.find(Product.class, id);
-		System.out.println(p.getDescription());
-		return p;
+	public Product getProductDetails( @RequestParam(value="id" ) Long id) {
+		return productDAO.getProductDetailsByID(id);
 	}
 
-	@RequestMapping(value = "/produit", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/addProduit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.CREATED)
-	public String addProduct(@RequestBody Product p) {
-
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
-		em.persist(p);
-		DatabaseHelper.commitTxAndClose(em);
-		return "Produit Ajouté";
-
+	@PreAuthorize("hasRole('ADMIN')")
+	public Product addProduct(@RequestBody Product p) {
+		productDAO.addProduct(p);
+		return p;
 	}
 
 
 	@PutMapping(value = "/produit" , consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.ACCEPTED)
-	public String updateProduct(@RequestBody Product prod) {
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
-		em.merge(prod);
-		DatabaseHelper.commitTxAndClose(em);
-
-		return "Produit a jour";
-
+	public Product updateProduct(@RequestBody Product prod) {
+		productDAO.updateProduct(prod);
+		return prod;
 	}
 
 	@DeleteMapping(value = "/produit")
 	@ResponseStatus( HttpStatus.ACCEPTED)
 	public String delProduct(@RequestBody long id) {
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
-		Product prod = em.find(Product.class, id);
-		em.remove(prod);
-		DatabaseHelper.commitTxAndClose(em);
-
+		productDAO.deleteProductByID(id);
 		return "Produit Supprimé";
 
 	}
