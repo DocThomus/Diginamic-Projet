@@ -1,18 +1,18 @@
 package fr.durandal.durandalback.product;
 
+import java.net.URL;
+
 import javax.persistence.EntityManager;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 import fr.durandal.durandalback.DatabaseHelper;
 
@@ -63,6 +63,20 @@ public class ProductController {
 
 		return "Produit Supprimé";
 
+	}
+	
+	@GetMapping (value = "/image/{imageName}", produces= MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody 
+	public ResponseEntity<Resource> getImageProduct(@PathVariable(value="imageName" ) String imageName) {
+		URL path = this.getClass().getClassLoader().getResource("images/" + imageName);
+		//System.out.println(path.toString());
+		ApplicationContext appContext = new ClassPathXmlApplicationContext();
+
+
+		Resource res = appContext.getResource(path.toString());
+		
+	
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "images/jpg").body(res);
 	}
 
 }
