@@ -13,22 +13,28 @@ public class Visitor {
 	@Column(unique = true)
 	private String email;
 	
-	@Column
+	@Column(name="hashedpassword")
 	private String hashedPassword;
 	
-	@Column
-	private String role;
+	@Column(name="isadmin")
+	private boolean isAdmin;
 	
 	public Visitor() {
 		
 	}
 	
-	public Visitor(int id, String email, String hashedPassword, String role) {
+	public Visitor(int id, String email, String hashedPassword, boolean isAdmin) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.hashedPassword = hashedPassword;
-		this.role = role;
+		this.isAdmin = isAdmin;
+	}
+	
+	public Visitor(String email, String hashedPassword, boolean isAdmin) {
+		this.email = email;
+		this.hashedPassword = hashedPassword;
+		this.isAdmin = isAdmin;
 	}
 	
 	public Visitor(String email, String hashedPassword) {
@@ -60,21 +66,21 @@ public class Visitor {
 		this.hashedPassword = hashedPassword;
 	}
 	
-	public String getRole() {
-		return this.role;
+	public boolean getIsAdmin() {
+		return this.isAdmin;
 	}
 	
-	public void SetRole(String role) {
-		this.role = role;
+	public void SetIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}	
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", hashedPassword=" + hashedPassword + ", role=" + role + "]";
+		return "User [id=" + id + ", email=" + email + ", hashedPassword=" + hashedPassword + ", isAdmin=" + isAdmin + "]";
 	}
 
 	// TEST
 	public static Visitor getTestUser() {
-		return new Visitor(42, "Greg@greg.com", "123pass", "utilisateur");
+		return new Visitor(42, "Greg@greg.com", "123pass", false);
 	}
 }

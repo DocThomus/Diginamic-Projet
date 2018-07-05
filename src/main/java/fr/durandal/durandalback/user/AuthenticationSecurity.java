@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationService implements UserDetailsService {
+public class AuthenticationSecurity implements UserDetailsService {
 
     @Autowired
     private AuthenticationDAO authenticationDAO;
@@ -20,11 +20,17 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("READ"));
+        List<GrantedAuthority> authorities = new ArrayList<>();        
         
         Visitor user = authenticationDAO.getUserByEmail(email);
+        if (user.getIsAdmin()) {
+        	authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        } else {
+        	authorities.add(new SimpleGrantedAuthority("USER"));
+        }  
+        
         UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+                
         return myUserDetails;
     }
 
