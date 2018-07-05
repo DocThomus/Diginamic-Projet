@@ -19,6 +19,10 @@ public class Visitor {
 	@Column
 	private String role;
 	
+	public Visitor() {
+		
+	}
+	
 	public Visitor(int id, String email, String hashedPassword, String role) {
 		super();
 		this.id = id;

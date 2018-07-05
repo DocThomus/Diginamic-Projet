@@ -1,33 +1,13 @@
 package fr.durandal.durandalback.product;
 
-import java.net.URL;
+import java.awt.List;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import fr.durandal.durandalback.DatabaseHelper;
 
-@RestController
+
 public class ProductDAO {
 
 	@GetMapping(value="/produit", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -77,24 +57,9 @@ public class ProductDAO {
 
 	}
 
-	@GetMapping (value = "/image/{imageName}", produces= MediaType.IMAGE_JPEG_VALUE)
-	@ResponseBody 
-	public ResponseEntity<Resource> getImageProduct(@PathVariable(value="imageName" ) String imageName) {
-		URL path = this.getClass().getClassLoader().getResource("images/" + imageName);
-		System.out.println(path.toString());
-		ApplicationContext appContext = new ClassPathXmlApplicationContext();
-
-
-		Resource res = appContext.getResource(path.toString());
-		
-	
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "images/jpg").body(res);
-	}
-
-
 	public static void initProducts() {
 		ArrayList<Product> tableauProduits = new ArrayList<Product>();
-
+		
 		String s1 = "Tout le monde sait jouer au 1000 Bornes : la première équipe qui franchit 1000 km - 1000 Bornes, en parant intelligemment les embûches de ses adversaires, gagne la partie! (Joueurs: 2 à 8, Date: 1954)";
 		String s2 = "Lancez-vous dans une course jusqu’à 6 joueurs en simultané et soyez le plus rapide à copier le code en superposant vos cartes transparentes. Dans Copyright, il y a 66 cartes transparentes comportant chacune une combinaison unique de 3 symboles. Tous les joueurs jouent en même temps : en superposant vos cartes, vous devrez être le premier à recopier un modèle imposé (qui change aléatoirement à chaque partie). (Joueurs: 2 à 6, Date: 2009)";
 		String s3 = "Trouvez le point commun entre les mots ! Illico se joue par équipes, et la partie est arbitrée par un sablier. Quel est le lien entre un fruit et une explosion ? Serait-ce la grenade ? Un couple et le nettoyage ? Mmh… le ménage non ? Cogitez aussi vite que possible car le sablier s’écoule ! Si une équipe trouve la solution, elle retourne le sablier et c'est au tour de l'autre équipe...avec le temps qui reste.Si une équipe ne trouve pas la solution avant épuisement du sablier, elle perd la manche. La partie se termine lorsqu’une équipe a remporté trois manches. (Joueurs: 2 à 8, Date: 2012)";
@@ -125,9 +90,9 @@ public class ProductDAO {
 		String s28 = "Vite, vite ! Aide les 4 petites souris à regagner leur lit avant que le chat n’ait mangé les 5 poissons ! (Joueurs: 2 à 4, Date: 2012)";
 		String s29 = "Les grenouilles balancent ! De petites grenouilles jouent en équilibre sur des nénuphars. Attention à ce qu'elles ne tombent pas dans la mare. (Joueurs: 2 à 8, Date: 2005)";
 		String s30 = "Les animaux du fermier Pippo sont tous uniques : il y a des chevaux, des cochons, des chats, des chiens et des vaches, tous combinés en 5 couleurs différentes. A chaque tour on retourne une carte qui présente 4 animaux dans 4 couleurs. Vite, vite, il faut chercher l'animal manquant dans la bonne couleur. Le premier qui le trouve gagne la carte. Quand toutes les cartes ont été trouvées, celui qui en a le plus a gagné. Un jeu intelligent qui aiguise les réflexes et le sens de l'observation. (Joueurs: 2 à 8, Date: 2005)";
-
-		String uri = "https://placeimg.com/240/280";
-
+		
+		//String uri = "https://placeimg.com/240/280";
+		
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
 
@@ -192,7 +157,7 @@ public class ProductDAO {
 		tableauProduits.add(p28);
 		tableauProduits.add(p29);
 		tableauProduits.add(p30);
-
+		
 		for(Product p : tableauProduits) {
 			em.persist(p);
 		}
