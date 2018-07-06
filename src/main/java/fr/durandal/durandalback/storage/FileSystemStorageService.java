@@ -1,5 +1,6 @@
 package fr.durandal.durandalback.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -27,9 +28,13 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void store(MultipartFile file) {
         try {
+        	System.out.println(file);
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
+            //System.out.println(file.getInputStream());
+            //System.out.println(this.rootLocation.resolve(file.getOriginalFilename()));
+            System.out.println(file.getName());
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
