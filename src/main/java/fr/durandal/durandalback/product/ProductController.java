@@ -11,11 +11,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @RestController
 public class ProductController {
+	
 	@Autowired
 	ProductDAO productDAO;
 	
@@ -28,21 +31,21 @@ public class ProductController {
 	public List<Product> getAllProducts() {
 		return productDAO.getAllProduct();
 	}
-	
-	@PostMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	@PostMapping(value = "/addProduit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.CREATED)
-	public String addProduct(@RequestBody Product p) {
+	@PreAuthorize("hasRole('ADMIN')")
+	public Product addProduct(@RequestBody Product p) {
 		productDAO.addProduct(p);
-		return "added";
+		return p;
 	}
 
 
 	@PutMapping(value = "/produit" , consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.ACCEPTED)
-	public String updateProduct(@RequestBody Product prod) {
+	public Product updateProduct(@RequestBody Product prod) {
 		productDAO.updateProduct(prod);
-		return "Produit a jour";
-
+		return prod;
 	}
 
 	@DeleteMapping(value = "/produit")
@@ -50,6 +53,7 @@ public class ProductController {
 	public String delProduct(@RequestBody long id) {
 		productDAO.deleteProductByID(id);
 		return "Produit Supprimé";
+
 	}
 	
 	@GetMapping (value = "/image/{imageName}", produces= MediaType.IMAGE_JPEG_VALUE)
@@ -62,6 +66,7 @@ public class ProductController {
 
 		Resource res = appContext.getResource(path.toString());
 		
+	
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "images/jpg").body(res);
 	}
 

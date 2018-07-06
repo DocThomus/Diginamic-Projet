@@ -17,6 +17,8 @@ public class ProductDAO {
 	@Autowired 
 	EntityManager em;
 
+	
+
 	@Transactional
 	public void initProducts() {
 		ArrayList<Product> tableauProduits = new ArrayList<Product>();
@@ -53,6 +55,7 @@ public class ProductDAO {
 		String s30 = "Les animaux du fermier Pippo sont tous uniques : il y a des chevaux, des cochons, des chats, des chiens et des vaches, tous combinés en 5 couleurs différentes. A chaque tour on retourne une carte qui présente 4 animaux dans 4 couleurs. Vite, vite, il faut chercher l'animal manquant dans la bonne couleur. Le premier qui le trouve gagne la carte. Quand toutes les cartes ont été trouvées, celui qui en a le plus a gagné. Un jeu intelligent qui aiguise les réflexes et le sens de l'observation. (Joueurs: 2 à 8, Date: 2005)";
 		
 		//String uri = "https://placeimg.com/240/280";
+		
 
 		Product p1 = new Product("1000 bornes",s1,19.90,35,"Cartes et petits jeux", "/image/1000-bornes.jpg", "Dujardin");
 		Product p2 = new Product("Copyright",s2,10.90,22,"Cartes et petits jeux", "/image/copyright.jpg", "Ferti");
@@ -119,8 +122,9 @@ public class ProductDAO {
 		for(Product p : tableauProduits) {
 			em.persist(p);
 		}
+
 	}
-	
+
 	@Transactional
 	public Product getProductDetailsByID(Long id) {
 		return em.find(Product.class, id);
@@ -128,6 +132,8 @@ public class ProductDAO {
 
 	@Transactional
 	public void addProduct(Product p) {
+		System.out.println(p);
+		System.out.println(em);
 		em.persist(p);
 	}
 
