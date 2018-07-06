@@ -1,8 +1,11 @@
 package fr.durandal.durandalback.product;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,22 +121,32 @@ public class ProductDAO {
 		}
 	}
 	
+	@Transactional
 	public Product getProductDetailsByID(Long id) {
 		return em.find(Product.class, id);
 	}
 
-
+	@Transactional
 	public void addProduct(Product p) {
 		em.persist(p);
 	}
 
 
+	@Transactional
+	public List<Product> getAllProduct(){
+		TypedQuery<Product> query = em.createQuery(" FROM Product", Product.class);
+		List<Product> products = query.getResultList();
+		return products;
+		
+	}
+	
+	@Transactional
 	public void updateProduct(Product prod) {
 		em.merge(prod);
 		
 	}
 
-
+	@Transactional
 	public void deleteProductByID(long id) {
 		Product p = em.find(Product.class, id);
 		em.remove(p);		

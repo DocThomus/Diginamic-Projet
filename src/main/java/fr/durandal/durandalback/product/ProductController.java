@@ -1,6 +1,7 @@
 package fr.durandal.durandalback.product;
 
 import java.net.URL;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +24,11 @@ public class ProductController {
 		return productDAO.getProductDetailsByID(id);
 	}
 
+	@GetMapping(value="/produits", produces= MediaType.APPLICATION_JSON_VALUE)
+	public List<Product> getAllProducts() {
+		return productDAO.getAllProduct();
+	}
+	
 	@PostMapping(value = "/produit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.CREATED)
 	public String addProduct(@RequestBody Product p) {
