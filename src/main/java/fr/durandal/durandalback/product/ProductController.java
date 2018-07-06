@@ -50,7 +50,7 @@ public class ProductController {
 
 	@DeleteMapping(value = "/produit")
 	@ResponseStatus( HttpStatus.ACCEPTED)
-	public String delProduct(@RequestBody long id) {
+	public String delProduct(@RequestParam long id) {
 		productDAO.deleteProductByID(id);
 		return "Produit Supprimé";
 

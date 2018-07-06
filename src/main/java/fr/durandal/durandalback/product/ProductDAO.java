@@ -67,7 +67,7 @@ public class ProductDAO {
 		Product p8 = new Product("Merlin",s8,49.90,25,"Jeux de plateau expert", "/image/merlin.jpg", "Queen Games");
 		Product p9 = new Product("Notre dame",s9,31.50,18,"Jeux de plateau expert", "/image/notre-dame.jpg", "Alea");
 		Product p10 = new Product("Cluedo",s10,29.90,3,"Jeux de plateau famille", "/image/cluedo.jpg", "Hasbro");
-		Product p11 = new Product("Monopoly",s11,13.90,19,"Jeux de plateau famille", "/image/monopoly.jpg", "Hasbro");
+		Product p11 = new Product("Monopoly",s11,13.90,19,"Jeux de plateau famille", "/image/monopoly-classique.jpg", "Hasbro");
 		Product p12 = new Product("Risk",s12,37.90,16,"Jeux de plateau famille", "/image/risk.jpg", "Hasbro");
 		Product p13 = new Product("Jeu d'échecs et de dames",s13,14.50,30,"Jeux de reflexion", "/image/jeu-d-echecs-et-de-dames.jpg", "Asmodée");
 		Product p14 = new Product("Rush Hour",s14,21.90,12,"Jeux de reflexion", "/image/rush-hour.jpg", "Thinkfun");
