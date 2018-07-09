@@ -9,11 +9,12 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class AuthenticationDAO {
-	
+
 	@Autowired
 	EntityManager em;
 
@@ -30,16 +31,18 @@ public class AuthenticationDAO {
 		// TODO : vérifier le mot de passe
 		return user;
 	}
-	
+
 	@Transactional
 	public void mockupUsers() {
 		List<Visitor> usersMockup = new ArrayList<Visitor>();
-		
-		usersMockup.add(new Visitor("admin", "admin", true));
-		usersMockup.add(new Visitor("user", "user", false));
-		usersMockup.add(new Visitor("Champion", "pass", true));
-		usersMockup.add(new Visitor("Michel", "pass", false));
-		
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+		usersMockup.add(new Visitor("admin", passwordEncoder.encode("admin"), true));
+		usersMockup.add(new Visitor("user", passwordEncoder.encode("user"), false));
+		usersMockup.add(new Visitor("Champion", passwordEncoder.encode("pass"), true));
+		usersMockup.add(new Visitor("Michel", passwordEncoder.encode("pass"), false));
+
 		for (Visitor v : usersMockup) {
 			em.persist(v);
 		}

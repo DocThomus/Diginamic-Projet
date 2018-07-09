@@ -50,9 +50,8 @@ public class ProductController {
 
 	@DeleteMapping(value = "/produit")
 	@ResponseStatus( HttpStatus.ACCEPTED)
-	public String delProduct(@RequestParam long id) {
+	public void delProduct(@RequestParam long id) {
 		productDAO.deleteProductByID(id);
-		return "Produit Supprimé";
 	}
 
 	@GetMapping (value = "/image/{imageName}", produces= MediaType.IMAGE_JPEG_VALUE)

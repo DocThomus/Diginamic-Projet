@@ -14,23 +14,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationSecurity implements UserDetailsService {
 
-    @Autowired
-    private AuthenticationDAO authenticationDAO;
-    
-    @Override
-    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-        
-        Set<GrantedAuthority> authorities = new HashSet<>();        
-        
-        Visitor user = authenticationDAO.getUserByEmail(email);
-        if (user.getIsAdmin()) {
-        	authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } 
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        
-        UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-                
-        return myUserDetails;
-    }
+	@Autowired
+	private AuthenticationDAO authenticationDAO;
+
+	@Override
+	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+
+		Set<GrantedAuthority> authorities = new HashSet<>();        
+
+		Visitor user = authenticationDAO.getUserByEmail(email);
+		if (user.getIsAdmin()) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		} 
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+
+		return myUserDetails;
+	}
 
 }
