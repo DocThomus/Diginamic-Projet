@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
 
@@ -23,6 +22,7 @@ public class Product {
 	private String ref;
 	*/
 	
+	@Type (type = "text")
 	@Column
 	private String name;
 	
