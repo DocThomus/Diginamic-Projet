@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import fr.durandal.durandalback.user.AuthenticationDAO;
+import fr.durandal.durandalback.command.CommandDAO;
 import fr.durandal.durandalback.product.ProductDAO;
 import fr.durandal.durandalback.storage.StorageProperties;
 import fr.durandal.durandalback.storage.StorageService;
@@ -21,6 +22,9 @@ public class DurandalBackApplication implements CommandLineRunner {
 	
 	@Autowired
 	ProductDAO productDAO;
+	
+	@Autowired
+	CommandDAO commandeDAO;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DurandalBackApplication.class, args);		
@@ -36,6 +40,7 @@ public class DurandalBackApplication implements CommandLineRunner {
 		System.out.println("Running mockups");
 		authenticationDAO.mockupUsers();
 		productDAO.initProducts();
+		commandeDAO.initCommands();
 	}
 
 	@Bean

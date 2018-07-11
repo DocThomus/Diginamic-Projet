@@ -1,11 +1,12 @@
 package fr.durandal.durandalback.user;
 
-import java.util.List;
 import java.util.Date;
 
-import javax.persistence.*;
-
-import fr.durandal.durandalback.command.Command;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Visitor {
@@ -40,8 +41,8 @@ public class Visitor {
 	private String adress;
 	
 	
-	@OneToMany(mappedBy="id")
-	private List<Command> commands;
+	//@OneToMany(mappedBy="id")
+	//private List<Command> commands;
 	
 	public Visitor() {
 		
@@ -100,14 +101,14 @@ public class Visitor {
 		this.hashedPassword = hashedPassword;
 	}
 
-	public List<Command> getCommands() {
+	/*public List<Command> getCommands() {
 		return commands;
 	}
 
 
 	public void setCommands(List<Command> commands) {
 		this.commands = commands;
-	}
+	}*/
 
 	public String getFirstName() {
 		return firstName;
