@@ -1,10 +1,13 @@
 package fr.durandal.durandalback.user;
 
+import java.util.List;
+
 import javax.persistence.*;
 
+import fr.durandal.durandalback.command.Command;
+
 @Entity
-public class Visitor {
-	
+public class Visitor {	
 	@Id
 	@SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", initialValue=1)
 	@GeneratedValue(generator = "user_id_seq")
@@ -18,6 +21,9 @@ public class Visitor {
 	
 	@Column(name="isadmin")
 	private boolean isAdmin;
+	
+	@OneToMany
+	private List<Command> commands;
 	
 	public Visitor() {
 		
@@ -74,6 +80,14 @@ public class Visitor {
 		this.isAdmin = isAdmin;
 	}	
 	
+	public List<Command> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(List<Command> commands) {
+		this.commands = commands;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", hashedPassword=" + hashedPassword + ", isAdmin=" + isAdmin + "]";

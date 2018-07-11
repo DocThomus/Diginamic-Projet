@@ -61,7 +61,7 @@ public class ProductController {
 		//System.out.println(path.toString());
 		ApplicationContext appContext = new ClassPathXmlApplicationContext();
 
-		System.out.println(path);
+		//System.out.println(path);
 		Resource res = appContext.getResource(path.toString());
 
 
