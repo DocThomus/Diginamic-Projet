@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.web.server.session.HeaderWebSessionIdResolver;
@@ -22,13 +23,13 @@ import fr.durandal.durandalback.user.AuthenticationSecurity;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		/*auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
 		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");*/
 	}
-		
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -38,21 +39,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.anyRequest().permitAll();
 	}
-	
+
 	@Bean
-    public WebSessionIdResolver webSessionIdResolver() {
-        HeaderWebSessionIdResolver resolver = new HeaderWebSessionIdResolver();
-        resolver.setHeaderName("X-AUTH-TOKEN");
-        return resolver;
-    }
-	
+	public WebSessionIdResolver webSessionIdResolver() {
+		HeaderWebSessionIdResolver resolver = new HeaderWebSessionIdResolver();
+		resolver.setHeaderName("X-AUTH-TOKEN");
+		return resolver;
+	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new NoEncodingPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationSecurity authSecurity) throws Exception {
-        auth.userDetailsService(authSecurity).passwordEncoder(passwordEncoder());
-    }
+	public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationSecurity authSecurity) throws Exception {
+		auth.userDetailsService(authSecurity).passwordEncoder(passwordEncoder());
+	}
 }

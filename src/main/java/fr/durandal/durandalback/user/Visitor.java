@@ -1,8 +1,11 @@
 package fr.durandal.durandalback.user;
 
+import java.util.List;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import fr.durandal.durandalback.command.Command;
 
 @Entity
 public class Visitor {
@@ -21,17 +24,24 @@ public class Visitor {
 	@Column(name="isadmin")
 	private boolean isAdmin;
 	
+	@Column
 	private String firstName;
 	
+	@Column
 	private String lastName;
 	
+	@Column
 	private int phone;
 	
+	@Column
 	private Date birthDate;
 	
+	@Column
 	private String adress;
 	
 	
+	@OneToMany(mappedBy="id")
+	private List<Command> commands;
 	
 	public Visitor() {
 		
@@ -72,6 +82,8 @@ public class Visitor {
 		this.email = email;
 	}
 	
+
+	
 	public boolean getIsAdmin() {
 		return this.isAdmin;
 	}
@@ -80,12 +92,21 @@ public class Visitor {
 		this.isAdmin = isAdmin;
 	}	
 	
+	
 	public String getHashedPassword() {
 		return hashedPassword;
 	}
-
 	public void setHashedPassword(String hashedPassword) {
 		this.hashedPassword = hashedPassword;
+	}
+
+	public List<Command> getCommands() {
+		return commands;
+	}
+
+
+	public void setCommands(List<Command> commands) {
+		this.commands = commands;
 	}
 
 	public String getFirstName() {

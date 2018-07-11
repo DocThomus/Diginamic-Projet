@@ -1,14 +1,18 @@
 package fr.durandal.durandalback.product;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Type;
+
+import fr.durandal.durandalback.command.ProductQuantity;
 
 @Entity
 public class Product {
@@ -23,6 +27,7 @@ public class Product {
 	private String ref;
 	*/
 	
+	@Type (type = "text")
 	@Column
 	private String name;
 	
@@ -49,6 +54,9 @@ public class Product {
 	
 	@Column(name="is_active")
 	private boolean isActive = true;
+	
+	@OneToMany(mappedBy="id")
+	private List<ProductQuantity> commandated;
 	
 	// Constructeure par défaut
 	public Product() {

@@ -1,8 +1,11 @@
 package fr.durandal.durandalback.product;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProductDAO {
-	
-	@Autowired
+
+	@Autowired 
 	EntityManager em;
 
+	
 
 	@Transactional
 	public void initProducts() {
@@ -51,38 +55,39 @@ public class ProductDAO {
 		String s30 = "Les animaux du fermier Pippo sont tous uniques : il y a des chevaux, des cochons, des chats, des chiens et des vaches, tous combinés en 5 couleurs différentes. A chaque tour on retourne une carte qui présente 4 animaux dans 4 couleurs. Vite, vite, il faut chercher l'animal manquant dans la bonne couleur. Le premier qui le trouve gagne la carte. Quand toutes les cartes ont été trouvées, celui qui en a le plus a gagné. Un jeu intelligent qui aiguise les réflexes et le sens de l'observation. (Joueurs: 2 à 8, Date: 2005)";
 		
 		//String uri = "https://placeimg.com/240/280";
-
-		Product p1 = new Product("1000 bornes",s1,19.90,35,"Cartes et petits jeux", "https://placeimg.com/240/280", "Dujardin");
-		Product p2 = new Product("Copyright",s2,10.90,22,"Cartes et petits jeux", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p3 = new Product("Illico",s3,11.50,36,"Cartes et petits jeux", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p4 = new Product("Cat cube",s4,10.90,60,"Casse tête", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p5 = new Product("Molkky original",s5,29.90,16,"Casse tête", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p6 = new Product("Rubik's cube",s6,16.90,41,"Casse tête", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p7 = new Product("Fallout",s7,53.90,29,"Jeux de plateau expert", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p8 = new Product("Merlin",s8,49.90,25,"Jeux de plateau expert", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p9 = new Product("Notre dame",s9,31.50,18,"Jeux de plateau expert", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p10 = new Product("Cluedo",s10,29.90,3,"Jeux de plateau famille", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p11 = new Product("Monopoly",s11,13.90,19,"Jeux de plateau famille", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p12 = new Product("Risk",s12,37.90,16,"Jeux de plateau famille", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p13 = new Product("Jeu d'échecs et de dames",s13,14.50,30,"Jeux de reflexion", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p14 = new Product("Rush Hour",s14,21.90,12,"Jeux de reflexion", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p15 = new Product("Tetris Link",s15,21.90,15,"Jeux de reflexion", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p16 = new Product("Escape Game Junior",s16,7.90,12,"Jeux de rôle", "https://placeimg.com/240/280", "Wizards of the Coast");
-		Product p17 = new Product("Donjons et dragons guide du maître",s17,49.90,7,"Jeux de rôle", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p18 = new Product("L'Anneau Unique",s18,49.95,25,"Jeux de rôle", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p19 = new Product("1944 Race to the Rhine",s19,48.90,8,"Jeux de wargame", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p20 = new Product("Britannia",s20,37.90,22,"Jeux de wargame", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p21 = new Product("Les Vikings",s21,53.90,15,"Jeux de wargame", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p22 = new Product("La révolution américiane",s22,42.90,23,"Jeux d'histoire", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p23 = new Product("Le chemin de fer clandestin",s23,52.90,18,"Jeux d'histoire", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p24 = new Product("ResPublica Romana",s24,49.90,16,"Jeux d'histoire", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p25 = new Product("Défis nature chrono",s25,18.90,25,"Jeux éducatif", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p26 = new Product("Drapeaux du monde",s26,13.90,7,"Jeux éducatif", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p27 = new Product("Maxitour paris",s27,29.90,10,"Jeux éducatif", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p28 = new Product("Les Petites Souris",s28,19.90,5,"Jeux jeunes Enfants", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p29 = new Product("Little Balancing",s29,8.90,15,"Jeux jeunes Enfants", "https://placeimg.com/240/280", "UNKNOWN");
-		Product p30 = new Product("Pippo",s30,8.90,15,"Jeux jeunes Enfants", "https://placeimg.com/240/280", "UNKNOWN");
 		
+
+		Product p1 = new Product("1000 bornes",s1,19.90,35,"Cartes et petits jeux", "/image/1000-bornes.jpg", "Dujardin");
+		Product p2 = new Product("Copyright",s2,10.90,22,"Cartes et petits jeux", "/image/copyright.jpg", "Ferti");
+		Product p3 = new Product("Illico",s3,11.50,36,"Cartes et petits jeux", "/image/illico.jpg", "Cocktail Games");
+		Product p4 = new Product("Cat cube",s4,10.90,60,"Casse tête", "/image/cat-cube.jpg", "Morning Players");
+		Product p5 = new Product("Molkky original",s5,29.90,16,"Casse tête", "/image/molkky-original.jpg", "Tactic");
+		Product p6 = new Product("Rubik's cube",s6,16.90,41,"Casse tête", "/image/rubik-s-cube.jpg", "Winning Moves");
+		Product p7 = new Product("Fallout",s7,53.90,29,"Jeux de plateau expert", "/image/fallout.jpg", "Edge");
+		Product p8 = new Product("Merlin",s8,49.90,25,"Jeux de plateau expert", "/image/merlin.jpg", "Queen Games");
+		Product p9 = new Product("Notre dame",s9,31.50,18,"Jeux de plateau expert", "/image/notre-dame.jpg", "Alea");
+		Product p10 = new Product("Cluedo",s10,29.90,3,"Jeux de plateau famille", "/image/cluedo.jpg", "Hasbro");
+		Product p11 = new Product("Monopoly",s11,13.90,19,"Jeux de plateau famille", "/image/monopoly-classique.jpg", "Hasbro");
+		Product p12 = new Product("Risk",s12,37.90,16,"Jeux de plateau famille", "/image/risk.jpg", "Hasbro");
+		Product p13 = new Product("Jeu d'échecs et de dames",s13,14.50,30,"Jeux de reflexion", "/image/jeu-d-echecs-et-de-dames.jpg", "Asmodée");
+		Product p14 = new Product("Rush Hour",s14,21.90,12,"Jeux de reflexion", "/image/rush-hour.jpg", "Thinkfun");
+		Product p15 = new Product("Tetris Link",s15,21.90,15,"Jeux de reflexion", "/image/tetris-link.jpg", "Asmodée");
+		Product p16 = new Product("Escape Game Junior",s16,7.90,12,"Jeux de rôle", "/image/escape-game-junior.jpg", "Fleurus");
+		Product p17 = new Product("Donjons et dragons guide du maître",s17,49.90,7,"Jeux de rôle", "/image/guide_du_maitre_donjons_et_dragons.jpg", "Wizards of the Coast");
+		Product p18 = new Product("L'Anneau Unique",s18,49.95,25,"Jeux de rôle", "/image/l-anneau-unique.jpg", "Edge");
+		Product p19 = new Product("1944 Race to the Rhine",s19,48.90,8,"Jeux de wargame", "/image/1944-race-to-the-rhine.jpg", "Asyncron Games");
+		Product p20 = new Product("Britannia",s20,37.90,22,"Jeux de wargame", "/image/britannia.jpg", "Edge");
+		Product p21 = new Product("Les Vikings",s21,53.90,15,"Jeux de wargame", "/image/les-vikings.jpg", "Asyncron Games");
+		Product p22 = new Product("La révolution américiane",s22,42.90,23,"Jeux d'histoire", "/image/1775-la-revolution-americaine.jpg", "Asyncron Games");
+		Product p23 = new Product("Le chemin de fer clandestin",s23,52.90,18,"Jeux d'histoire", "/image/le-chemin-de-fer-clandestin.jpg", "Academy Games");
+		Product p24 = new Product("ResPublica Romana",s24,49.90,16,"Jeux d'histoire", "/image/res-publica-romana.jpg", "Edge");
+		Product p25 = new Product("Défis nature chrono",s25,18.90,25,"Jeux éducatif", "/image/defis-nature-chrono.jpg", "Bioviva");
+		Product p26 = new Product("Drapeaux du monde",s26,13.90,7,"Jeux éducatif", "/image/drapeaux-du-monde.jpg", "Tactic");
+		Product p27 = new Product("Maxitour paris",s27,29.90,10,"Jeux éducatif", "/image/maxitour-paris.jpg", "Oya");
+		Product p28 = new Product("Les Petites Souris",s28,19.90,5,"Jeux jeunes Enfants", "/image/les-petites-souris.jpg", "Nathan");
+		Product p29 = new Product("Little Balancing",s29,8.90,15,"Jeux jeunes Enfants", "/image/little_balancing.jpg", "Djeco");
+		Product p30 = new Product("Pippo",s30,8.90,15,"Jeux jeunes Enfants", "/image/pippo.jpg", "Gigamic");
+
 		tableauProduits.add(p1);
 		tableauProduits.add(p2);
 		tableauProduits.add(p3);
@@ -125,7 +130,6 @@ public class ProductDAO {
 		return em.find(Product.class, id);
 	}
 
-
 	@Transactional
 	public void addProduct(Product p) {
 		System.out.println(p);
@@ -133,6 +137,15 @@ public class ProductDAO {
 		em.persist(p);
 	}
 
+
+	@Transactional
+	public List<Product> getAllProduct(){
+		TypedQuery<Product> query = em.createQuery(" FROM Product", Product.class);
+		List<Product> products = query.getResultList();
+		return products;
+		
+	}
+	
 	@Transactional
 	public void updateProduct(Product prod) {
 		em.merge(prod);
