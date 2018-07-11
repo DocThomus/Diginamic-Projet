@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,12 @@ public class CommandController {
 	@GetMapping(value="/commands", produces= MediaType.APPLICATION_JSON_VALUE)
 	public List<Command> getAllCommands() {
 		return commandDAO.getAllCommands();
+	}
+	
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping(value="/commandsFrom", produces= MediaType.APPLICATION_JSON_VALUE)
+	public List<Command> getOwnCommands(@RequestParam String userEmail) {
+		return commandDAO.getCommandsByUserEmail(userEmail);
 	}
 	
 	@PostMapping(value = "/addCommand", consumes = MediaType.APPLICATION_JSON_VALUE)
