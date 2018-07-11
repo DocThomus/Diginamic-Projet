@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,7 @@ public class AuthenticationController {
 	@PutMapping(value = "/updateUser" , consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus( HttpStatus.ACCEPTED)
 	public Visitor updateUser(@RequestBody Visitor v) {
+		System.out.println("UPDATE " + v);
 		String passwordNotHashed = v.getHashedPassword();
 		String passwordHashed = securityConfig.passwordEncoder().encode(passwordNotHashed);
 		v.setHashedPassword(passwordHashed);
@@ -49,4 +51,10 @@ public class AuthenticationController {
 		v.setHashedPassword(null);
 		return v;	
 	}
+	
+	@GetMapping(value="/getUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Visitor current(@RequestParam String email) {
+		return authDAO.getUserByEmail(email);
+	}
+	
 }
