@@ -36,6 +36,14 @@ public class CommandDAO {
 	}
 	
 	@Transactional
+	public List<Command> getCommandsByUserEmail(String userEmail) {
+		TypedQuery<Command> query = em.createQuery("SELECT c FROM Command c INNER JOIN c.client cl WHERE cl.email = :userEmail", Command.class);
+		query.setParameter("userEmail", userEmail);
+		List<Command> commands = query.getResultList();
+		return commands;		
+	}
+	
+	@Transactional
 	public void addCommand(Command c) {
 		em.persist(c);
 	}
@@ -57,6 +65,5 @@ public class CommandDAO {
 		
 		command.setContenuCommande(contenuCommande);	
 		em.merge(command);				
-	}
-	
+	}	
 }
