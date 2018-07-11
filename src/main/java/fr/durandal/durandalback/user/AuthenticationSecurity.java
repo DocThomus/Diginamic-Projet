@@ -28,7 +28,7 @@ public class AuthenticationSecurity implements UserDetailsService {
         } 
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         
-        UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        UserDetails myUserDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getHashedPassword(), authorities);
                 
         return myUserDetails;
     }

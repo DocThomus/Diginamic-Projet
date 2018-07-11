@@ -1,5 +1,7 @@
 package fr.durandal.durandalback.user;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,18 @@ public class Visitor {
 	
 	@Column(name="isadmin")
 	private boolean isAdmin;
+	
+	private String firstName;
+	
+	private String lastName;
+	
+	private int phone;
+	
+	private Date birthDate;
+	
+	private String adress;
+	
+	
 	
 	public Visitor() {
 		
@@ -58,14 +72,6 @@ public class Visitor {
 		this.email = email;
 	}
 	
-	public String getPassword() {
-		return hashedPassword;
-	}
-	
-	public void setPassword(String hashedPassword) {
-		this.hashedPassword = hashedPassword;
-	}
-	
 	public boolean getIsAdmin() {
 		return this.isAdmin;
 	}
@@ -74,6 +80,58 @@ public class Visitor {
 		this.isAdmin = isAdmin;
 	}	
 	
+	public String getHashedPassword() {
+		return hashedPassword;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", hashedPassword=" + hashedPassword + ", isAdmin=" + isAdmin + "]";

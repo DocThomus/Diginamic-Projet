@@ -32,6 +32,19 @@ public class AuthenticationDAO {
 	}
 	
 	@Transactional
+	public void addUser(Visitor v) {
+		System.out.println(v);
+		System.out.println(em);
+		em.persist(v);
+	}
+	
+	@Transactional
+	public void updateUser(Visitor v) {
+		em.merge(v);
+		
+	}
+	
+	@Transactional
 	public void mockupUsers() {
 		List<Visitor> usersMockup = new ArrayList<Visitor>();
 		
